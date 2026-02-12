@@ -1,9 +1,311 @@
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'Arial', sans-serif;
+@import './variables';
+@import './mixins';
+
+* {
+  box-sizing: border-box;
 }
 
-.App {
-    text-align: center;
-    padding: 2rem;
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: $font-body;
+  color: $color-text;
+  background: radial-gradient(circle at top, rgba(0, 179, 255, 0.18), transparent 55%),
+    radial-gradient(circle at 20% 20%, rgba(0, 245, 160, 0.18), transparent 45%),
+    $color-bg;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: $font-display;
+}
+
+.auth-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.login-card {
+  width: min(420px, 100%);
+  padding: 2.8rem;
+  border-radius: 24px;
+  @include glass-panel;
+}
+
+.login-subtitle {
+  margin: 1rem 0 0;
+  color: $color-muted;
+  font-size: 0.95rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand--stack {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.brand__glow {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, $color-electric, $color-neon-blue);
+  box-shadow: $glow-electric, $glow-blue;
+}
+
+.brand__eyebrow {
+  margin: 0;
+  font-size: 0.7rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: $color-muted;
+}
+
+.login-form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.input-group {
+  display: grid;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  color: $color-muted;
+}
+
+.input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 245, 160, 0.3);
+  background: rgba(11, 18, 32, 0.85);
+  color: $color-text;
+  outline: none;
+}
+
+.input:focus {
+  border-color: rgba(0, 179, 255, 0.65);
+  box-shadow: 0 0 16px rgba(0, 179, 255, 0.3);
+}
+
+.button {
+  padding: 0.85rem 1.2rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #05111f;
+  background: linear-gradient(135deg, $color-electric, $color-neon-blue);
+  box-shadow: $glow-electric;
+  cursor: pointer;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.button--ghost {
+  background: transparent;
+  border: 1px solid rgba(0, 245, 160, 0.35);
+  color: $color-text;
+  box-shadow: none;
+}
+
+.error {
+  color: $color-danger;
+  font-size: 0.9rem;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sidebar-actions {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.main-area {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.meta-text {
+  margin: 0.35rem 0 0;
+  color: $color-muted;
+  font-size: 0.9rem;
+}
+
+.status-pill {
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid rgba(0, 179, 255, 0.4);
+  color: $color-neon-blue;
+}
+
+.stats-panel {
+  padding: 1.5rem;
+  border-radius: 20px;
+  @include glass-panel;
+}
+
+.stats-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.stats-status {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: $color-electric;
+}
+
+.stats-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.stats-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  background: rgba(11, 18, 32, 0.75);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.stats-item strong {
+  font-size: 1.1rem;
+}
+
+.stats-item--available {
+  border-left: 3px solid $color-electric;
+}
+
+.stats-item--charging {
+  border-left: 3px solid $color-neon-blue;
+}
+
+.stats-item--offline {
+  border-left: 3px solid $color-danger;
+}
+
+.stats-item--total {
+  border-left: 3px solid $color-warning;
+}
+
+.grid-board {
+  display: grid;
+  gap: 0.4rem;
+  padding: 1.4rem;
+  border-radius: 20px;
+  @include glass-panel;
+}
+
+.station-cell {
+  position: relative;
+  padding-top: 100%;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.station-cell__inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  font-size: 0.65rem;
+  color: $color-muted;
+}
+
+.station-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+}
+
+.station-cell--disponible {
+  border-color: rgba(0, 245, 160, 0.6);
+  box-shadow: inset 0 0 12px rgba(0, 245, 160, 0.35);
+}
+
+.station-cell--disponible .station-dot {
+  background: $color-electric;
+  box-shadow: $glow-electric;
+}
+
+.station-cell--en_charge {
+  border-color: rgba(0, 179, 255, 0.6);
+  box-shadow: inset 0 0 12px rgba(0, 179, 255, 0.35);
+}
+
+.station-cell--en_charge .station-dot {
+  background: $color-neon-blue;
+  box-shadow: $glow-blue;
+}
+
+.station-cell--en_panne {
+  border-color: rgba(255, 77, 109, 0.6);
+  box-shadow: inset 0 0 12px rgba(255, 77, 109, 0.35);
+}
+
+.station-cell--en_panne .station-dot {
+  background: $color-danger;
+  box-shadow: 0 0 12px rgba(255, 77, 109, 0.5);
+}
+
+.station-cell--empty {
+  opacity: 0.4;
+}
+
+@media (max-width: 980px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .main-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
