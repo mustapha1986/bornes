@@ -1,0 +1,3 @@
+api_stations:
+    resource: '../src/Controller/'
+    type: attribute
